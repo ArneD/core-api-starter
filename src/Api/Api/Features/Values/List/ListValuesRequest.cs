@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Api.Domain.Values.List
+namespace Api.Features.Values.List
 {
     public class ListValuesRequest : IRequest<ListValuesResponse>
     {

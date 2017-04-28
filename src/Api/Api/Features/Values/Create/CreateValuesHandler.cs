@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Api.Domain.Values.Create
+namespace Api.Features.Values.Create
 {
     public class CreateValuesHandler : IRequestHandler<CreateValuesRequest, CreateValuesResponse>
     {

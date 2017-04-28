@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Api.Domain.Values.Create
+namespace Api.Features.Values.Create
 {
     public class CreateValuesValidator : AbstractValidator<CreateValuesRequest>
     {

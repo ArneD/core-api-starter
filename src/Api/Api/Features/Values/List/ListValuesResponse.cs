@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Api.Domain.Values.List
+namespace Api.Features.Values.List
 {
     public class ListValuesResponse : Collection<ListValuesResponseItem>
     {

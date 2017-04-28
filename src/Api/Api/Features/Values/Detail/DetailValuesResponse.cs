@@ -1,4 +1,4 @@
-﻿namespace Api.Domain.Values.Detail
+﻿namespace Api.Features.Values.Detail
 {
     public class DetailValuesResponse
     {

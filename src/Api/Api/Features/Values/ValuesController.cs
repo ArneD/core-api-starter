@@ -1,10 +1,10 @@
-﻿using Api.Domain.Values.Create;
-using Api.Domain.Values.Detail;
-using Api.Domain.Values.List;
+﻿using Api.Features.Values.Create;
+using Api.Features.Values.Detail;
+using Api.Features.Values.List;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Domain.Values
+namespace Api.Features.Values
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller

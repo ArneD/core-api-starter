@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Api.Domain.Values;
+using Api.Features.Values;
 using Api.Infrastructure.Validation;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
