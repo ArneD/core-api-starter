@@ -51,13 +51,13 @@ namespace Api.Features.Values
         }
 
         // PUT api/values/5
-        [HttpPut("{id}", Name = PutRouteName)]
+        [HttpPut("{id:int:min(1)}", Name = PutRouteName)]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}", Name = DeleteRouteName)]
+        [HttpDelete("{id:int:min(1)}", Name = DeleteRouteName)]
         public void Delete(int id)
         {
         }

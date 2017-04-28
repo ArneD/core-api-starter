@@ -1,5 +1,7 @@
 ﻿using System;
+using Api.Features.Values.Create;
 using Api.Infrastructure.Container;
+using Api.Infrastructure.Validation;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
@@ -32,8 +34,11 @@ namespace Api.Infrastructure
         {
             // Add framework services.
             services
-                .AddMvc()
-                .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<Startup>(); });
+                .AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(ValidationExceptionFilter));
+                })
+                .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<CreateValuesValidator>(); });
 
             ApplicationContainer = services.UseAutofac();
 
