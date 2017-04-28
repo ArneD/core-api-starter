@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Features.Values
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ValuesController : Controller
     {
         internal const string GetListRouteName = "Values_GetList";

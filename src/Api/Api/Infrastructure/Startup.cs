@@ -40,6 +40,11 @@ namespace Api.Infrastructure
                 })
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<CreateValuesValidator>(); });
 
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+            });
+
             ApplicationContainer = services.UseAutofac();
 
             return new AutofacServiceProvider(ApplicationContainer);
