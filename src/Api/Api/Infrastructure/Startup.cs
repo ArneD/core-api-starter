@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Api.Features.Values.Create;
+using Api.Infrastructure.Configs;
 using Api.Infrastructure.Container;
 using Api.Infrastructure.Validation;
 using Autofac;
@@ -7,6 +9,7 @@ using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -56,6 +59,7 @@ namespace Api.Infrastructure
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseMiddleware<HeadersMiddleware>();
             app.UseMvc();
 
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

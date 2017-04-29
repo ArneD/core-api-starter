@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Api.Features.Values;
+using Api.Infrastructure.Container;
 using Api.Infrastructure.Validation;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api.Infrastructure.Container
+namespace Api.Infrastructure.Configs
 {
     public static class AutofacConfig
     {
