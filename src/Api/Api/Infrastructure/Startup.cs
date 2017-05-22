@@ -6,6 +6,7 @@ using Api.Infrastructure.Container;
 using Api.Infrastructure.Validation;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using CorsPolicySettings;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,8 @@ namespace Api.Infrastructure
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCorsPolicies(Configuration);
+
             services
                 .AddMvc(options =>
                 {
@@ -58,6 +61,8 @@ namespace Api.Infrastructure
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors("AllowAll");
 
             app.UseMiddleware<HeadersMiddleware>();
             app.UseMvc();
