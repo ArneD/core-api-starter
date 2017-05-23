@@ -10,12 +10,17 @@ namespace Api.Infrastructure.Validation
     {
         public void OnException(ExceptionContext context)
         {
+            var validationException = context.Exception as ValidationException;
             var aggregateException = context.Exception as AggregateException;
-
-            if (context.Exception is ValidationException ||
-                (aggregateException != null && aggregateException.InnerExceptions.Any(exception => exception is ValidationException)))
+            
+            if (validationException == null && aggregateException != null && aggregateException.InnerExceptions.Any(exception => exception is ValidationException))
             {
-                context.Result = new BadRequestResult();
+                validationException = aggregateException.InnerExceptions.First(exception => exception is ValidationException) as ValidationException;
+            }
+
+            if (validationException != null)
+            {
+                context.Result = new BadRequestObjectResult(validationException.Errors.Select(failure => new ErrorMessage(failure)));
             }
         }
     }
