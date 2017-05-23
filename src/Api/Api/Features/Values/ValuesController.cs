@@ -29,7 +29,7 @@ namespace Api.Features.Values
         [HttpGet(Name = GetListRouteName)]
         public IActionResult Get([FromQuery] ListValuesRequest listValuesRequest)
         {
-            var result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).Result;
+            ListValuesResponse result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).Result;
             return Ok(result);
         }
 

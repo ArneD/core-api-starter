@@ -8,6 +8,8 @@ using Autofac.Extensions.DependencyInjection;
 using Autofac.Features.Variance;
 using MediatR;
 using MediatR.Pipeline;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Infrastructure.Configs
@@ -16,6 +18,8 @@ namespace Api.Infrastructure.Configs
     {
         public static IContainer UseAutofac(this IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
             var builder = new ContainerBuilder();
             builder.RegisterSource(new ContravariantRegistrationSource());
 
@@ -35,6 +39,13 @@ namespace Api.Infrastructure.Configs
             builder.RegisterModule(new MediatorModule());
             
             builder.RegisterGeneric(typeof(ValidationPreProcessor<>)).As(typeof(IRequestPreProcessor<>));
+
+            builder.Register(context =>
+            {
+                var urlHelperFactory = context.Resolve<IUrlHelperFactory>();
+                var actionContextAccessor = context.Resolve<IActionContextAccessor>();
+                return urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
+            });
 
             builder.Populate(serviceCollection);
 

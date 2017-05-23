@@ -1,24 +1,31 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Api.Features.Values.List
 {
-    public class ListValuesResponse : Collection<ListValuesResponseItem>
+    public class ListValuesResponse
     {
-        public ListValuesResponse(IList<ListValuesResponseItem> values)
-            : base (values)
-        { }
+        public ListValuesResponse(IList<ListValuesResponseItem> values, IEnumerable<Link> links)
+        {
+            Values = values;
+            Links = links;
+        }
+
+        public IList<ListValuesResponseItem> Values { get; }
+        public IEnumerable<Link> Links { get; }
     }
 
     public class ListValuesResponseItem
     {
-        public ListValuesResponseItem(int id, string value)
+        public ListValuesResponseItem(int id, string value, IEnumerable<Link> links)
         {
             Id = id;
             Value = value;
+            Links = links;
         }
 
         public int Id { get; }
         public string Value { get; }
+        public IEnumerable<Link> Links { get; }
     }
 }
+
