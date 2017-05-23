@@ -1,5 +1,6 @@
 ﻿using Api.Features.Values.Create;
 using Api.Features.Values.Detail;
+using Api.Features.Values.Edit;
 using Api.Features.Values.List;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -53,8 +54,13 @@ namespace Api.Features.Values
 
         // PUT api/values/5
         [HttpPut("{id:int:min(1)}", Name = PutRouteName)]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put([FromRoute] int id, [FromBody] EditValuesRequest editValuesRequest)
         {
+            editValuesRequest.Id = id;
+
+            var result = _mediator.Send(editValuesRequest).Result;
+
+            return Ok(result);
         }
 
         // DELETE api/values/5
