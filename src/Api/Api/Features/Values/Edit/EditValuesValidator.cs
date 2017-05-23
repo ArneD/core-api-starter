@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Api.Infrastructure.Validation;
+using FluentValidation;
 
 namespace Api.Features.Values.Edit
 {
@@ -6,7 +7,7 @@ namespace Api.Features.Values.Edit
     {
         public EditValuesValidator()
         {
-            RuleFor(request => request.Id).GreaterThan(0).Must(Exist);
+            RuleFor(request => request.Id).GreaterThan(0).Must(Exist).WithErrorCode(ValidationErrorCode.NotFound);
             RuleFor(request => request.Value).NotEmpty();
         }
 

@@ -20,7 +20,10 @@ namespace Api.Infrastructure.Validation
 
             if (validationException != null)
             {
-                context.Result = new BadRequestObjectResult(validationException.Errors.Select(failure => new ErrorMessage(failure)));
+                if(validationException.Errors.Any(failure => failure.HasValidationErrorCode(ValidationErrorCode.NotFound)))
+                    context.Result = new NotFoundResult();
+                else
+                    context.Result = new BadRequestObjectResult(validationException.Errors.Select(failure => new ErrorMessage(failure)));
             }
         }
     }
