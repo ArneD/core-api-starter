@@ -21,7 +21,9 @@ namespace Api.Infrastructure.Configs
 
             builder.RegisterAssemblyTypes(typeof(ValuesController).GetTypeInfo().Assembly).Where(t =>
                     t.GetInterfaces().Any(i => i.IsClosedTypeOf(typeof(IRequestHandler<,>))
+                                               || i.IsClosedTypeOf(typeof(IRequestHandler<>))
                                                || i.IsClosedTypeOf(typeof(IAsyncRequestHandler<,>))
+                                               || i.IsClosedTypeOf(typeof(IAsyncRequestHandler<>))
                                                || i.IsClosedTypeOf(typeof(ICancellableAsyncRequestHandler<,>))
                                                || i.IsClosedTypeOf(typeof(INotificationHandler<>))
                                                || i.IsClosedTypeOf(typeof(IAsyncNotificationHandler<>))

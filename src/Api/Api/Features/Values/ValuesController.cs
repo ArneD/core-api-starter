@@ -1,4 +1,5 @@
 ﻿using Api.Features.Values.Create;
+using Api.Features.Values.Delete;
 using Api.Features.Values.Detail;
 using Api.Features.Values.Edit;
 using Api.Features.Values.List;
@@ -65,8 +66,11 @@ namespace Api.Features.Values
 
         // DELETE api/values/5
         [HttpDelete("{id:int:min(1)}", Name = DeleteRouteName)]
-        public void Delete(int id)
+        public IActionResult Delete([FromRoute] DeleteValuesRequest deleteValuesRequest)
         {
+            _mediator.Send(deleteValuesRequest).Wait();
+
+            return NoContent();
         }
     }
 }
