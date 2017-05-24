@@ -9,6 +9,7 @@
     using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -35,6 +36,8 @@
         {
             // Add framework services.
             services.AddCorsPolicies(Configuration);
+
+            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             services
                 .AddMvc(options => { options.Filters.Add(typeof(ValidationExceptionFilter)); })
