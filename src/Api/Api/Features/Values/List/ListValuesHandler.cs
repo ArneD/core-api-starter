@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Api.Features.Values.Delete;
-using Api.Features.Values.Detail;
-using Api.Features.Values.Edit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,12 +29,7 @@ namespace Api.Features.Values.List
         {
             return new []
             {
-                new Link
-                {
-                    Type = "POST",
-                    Rel = "self",
-                    Href = _urlHelper.Link(ValuesController.PostRouteName, null)
-                },
+                _urlHelper.CreateCreateValuesLinkForCollection()
             };
         }
 
@@ -45,24 +37,9 @@ namespace Api.Features.Values.List
         {
             var links = new[]
             {
-                new Link
-                {
-                    Type = "GET",
-                    Rel = "self",
-                    Href = _urlHelper.Link(ValuesController.GetByIdRouteName, new DetailValuesRequest{ Id = id})
-                },
-                new Link
-                {
-                    Type = "PUT",
-                    Rel = "self",
-                    Href = _urlHelper.Link(ValuesController.PutRouteName, new EditValuesRequest{ Id = id})
-                },
-                new Link
-                {
-                    Type = "DELETE",
-                    Rel = "self",
-                    Href = _urlHelper.Link(ValuesController.DeleteRouteName, new DeleteValuesRequest{ Id = id})
-                },
+                _urlHelper.CreateDetailValuesLink(id),
+                _urlHelper.CreateEditValuesLink(id),
+                _urlHelper.CreateDeleteValuesLink(id)
             };
             return links;
         }

@@ -1,8 +1,11 @@
-﻿namespace Api.Features.Values.Detail
+﻿using System.Collections.Generic;
+
+namespace Api.Features.Values.Detail
 {
-    public class DetailValuesResponse
+    public class DetailValuesResponse : BaseHateosResponse
     {
-        public DetailValuesResponse(string value)
+        public DetailValuesResponse(string value, IEnumerable<Link> links)
+            : base(links)
         {
             Value = value;
         }

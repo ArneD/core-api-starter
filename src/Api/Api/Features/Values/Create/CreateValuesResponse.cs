@@ -1,8 +1,11 @@
-﻿namespace Api.Features.Values.Create
+﻿using System.Collections.Generic;
+
+namespace Api.Features.Values.Create
 {
-    public class CreateValuesResponse
+    public class CreateValuesResponse : BaseHateosResponse
     {
-        public CreateValuesResponse(int id, string value)
+        public CreateValuesResponse(int id, string value, IEnumerable<Link> links)
+            : base(links)
         {
             Id = id;
             Value = value;

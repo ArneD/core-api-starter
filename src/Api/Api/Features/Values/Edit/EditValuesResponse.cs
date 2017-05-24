@@ -1,14 +1,17 @@
 ﻿namespace Api.Features.Values.Edit
 {
-    public class EditValuesResponse
-    {
-        public int Id { get; }
-        public string Value { get; }
+    using System.Collections.Generic;
 
-        public EditValuesResponse(int id, string value)
+    public class EditValuesResponse : BaseHateosResponse
+    {
+        public EditValuesResponse(int id, string value, IEnumerable<Link> links)
+            : base(links)
         {
             Id = id;
             Value = value;
         }
+
+        public int Id { get; }
+        public string Value { get; }
     }
 }

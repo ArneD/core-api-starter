@@ -1,13 +1,13 @@
-﻿using Api.Features.Values.Create;
-using Api.Features.Values.Delete;
-using Api.Features.Values.Detail;
-using Api.Features.Values.Edit;
-using Api.Features.Values.List;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Features.Values
+﻿namespace Api.Features.Values
 {
+    using Create;
+    using Delete;
+    using Detail;
+    using Edit;
+    using List;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ValuesController : Controller
