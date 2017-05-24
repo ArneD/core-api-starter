@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation;
-using MediatR.Pipeline;
-
-namespace Api.Infrastructure.Validation
+﻿namespace Api.Infrastructure.Validation
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using FluentValidation;
+    using MediatR.Pipeline;
+
     public class ValidationPreProcessor<TRequest> : IRequestPreProcessor<TRequest>
     {
         private readonly IValidator<TRequest>[] _validators;
@@ -24,9 +24,7 @@ namespace Api.Infrastructure.Validation
                 .ToList();
 
             if (failures.Any())
-            {
                 throw new ValidationException(failures);
-            }
 
             return Task.FromResult(0);
         }

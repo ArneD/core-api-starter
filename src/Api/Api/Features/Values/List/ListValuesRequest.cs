@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Api.Features.Values.List
+﻿namespace Api.Features.Values.List
 {
+    using MediatR;
+
     public class ListValuesRequest : IRequest<ListValuesResponse>
     {
     }

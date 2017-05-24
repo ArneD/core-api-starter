@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Features.Values.Detail
+﻿namespace Api.Features.Values.Detail
 {
+    using System.Collections.Generic;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     public class DetailValuesHandler : IRequestHandler<DetailValuesRequest, DetailValuesResponse>
     {
         private readonly IUrlHelper _urlHelper;
@@ -31,7 +31,5 @@ namespace Api.Features.Values.Detail
             };
             return links;
         }
-
-        
     }
 }

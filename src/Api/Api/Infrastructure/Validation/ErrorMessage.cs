@@ -1,16 +1,16 @@
-using FluentValidation.Results;
-
 namespace Api.Infrastructure.Validation
 {
+    using FluentValidation.Results;
+
     public class ErrorMessage
     {
-        public string Message { get; set; }
-        public string Code { get; set; }
-
         public ErrorMessage(ValidationFailure validationFailure)
         {
             Message = validationFailure.ErrorMessage;
             Code = validationFailure.ErrorCode;
         }
+
+        public string Message { get; set; }
+        public string Code { get; set; }
     }
 }

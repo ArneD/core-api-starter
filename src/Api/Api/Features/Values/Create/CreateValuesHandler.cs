@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Features.Values.Create
+﻿namespace Api.Features.Values.Create
 {
+    using System;
+    using System.Collections.Generic;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     public class CreateValuesHandler : IRequestHandler<CreateValuesRequest, CreateValuesResponse>
     {
         private readonly IUrlHelper _urlHelper;

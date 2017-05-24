@@ -29,7 +29,7 @@
         [HttpGet(Name = GetListRouteName)]
         public IActionResult Get([FromQuery] ListValuesRequest listValuesRequest)
         {
-            ListValuesResponse result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).Result;
+            var result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).Result;
             return Ok(result);
         }
 

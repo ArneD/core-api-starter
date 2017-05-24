@@ -16,7 +16,7 @@
         {
             // Update object in domain
 
-            return new EditValuesResponse(message.Id, message.Value, new []
+            return new EditValuesResponse(message.Id, message.Value, new[]
             {
                 _urlHelper.CreateListValuesLink(),
                 _urlHelper.CreateDetailValuesLink(message.Id),

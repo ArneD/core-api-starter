@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-
-namespace Api.Infrastructure.Configs
+﻿namespace Api.Infrastructure.Configs
 {
-    public class HeadersMiddleware 
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+
+    public class HeadersMiddleware
     {
         private readonly RequestDelegate _next;
 

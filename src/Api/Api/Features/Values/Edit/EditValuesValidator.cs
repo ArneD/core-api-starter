@@ -1,8 +1,8 @@
-﻿using Api.Infrastructure.Validation;
-using FluentValidation;
-
-namespace Api.Features.Values.Edit
+﻿namespace Api.Features.Values.Edit
 {
+    using FluentValidation;
+    using Infrastructure.Validation;
+
     public class EditValuesValidator : AbstractValidator<EditValuesRequest>
     {
         public EditValuesValidator()

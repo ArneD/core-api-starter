@@ -1,19 +1,19 @@
-﻿using System.Linq;
-using System.Reflection;
-using Api.Features.Values;
-using Api.Infrastructure.Container;
-using Api.Infrastructure.Validation;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Autofac.Features.Variance;
-using MediatR;
-using MediatR.Pipeline;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Api.Infrastructure.Configs
+﻿namespace Api.Infrastructure.Configs
 {
+    using System.Linq;
+    using System.Reflection;
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
+    using Autofac.Features.Variance;
+    using Container;
+    using Features.Values;
+    using MediatR;
+    using MediatR.Pipeline;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
+    using Microsoft.Extensions.DependencyInjection;
+    using Validation;
+
     public static class AutofacConfig
     {
         public static IContainer UseAutofac(this IServiceCollection serviceCollection)
@@ -37,7 +37,7 @@ namespace Api.Infrastructure.Configs
                 .AsImplementedInterfaces();
 
             builder.RegisterModule(new MediatorModule());
-            
+
             builder.RegisterGeneric(typeof(ValidationPreProcessor<>)).As(typeof(IRequestPreProcessor<>));
 
             builder.Register(context =>

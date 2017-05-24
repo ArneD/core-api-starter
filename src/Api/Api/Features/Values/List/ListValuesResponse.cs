@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Api.Features.Values.List
+﻿namespace Api.Features.Values.List
 {
+    using System.Collections.Generic;
+
     public class ListValuesResponse : BaseHateosResponse
     {
         public ListValuesResponse(IList<ListValuesResponseItem> values, IEnumerable<Link> links)
@@ -26,4 +26,3 @@ namespace Api.Features.Values.List
         public string Value { get; }
     }
 }
-

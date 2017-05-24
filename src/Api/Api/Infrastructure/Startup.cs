@@ -1,30 +1,27 @@
-﻿using System;
-using System.Threading.Tasks;
-using Api.Features.Values.Create;
-using Api.Infrastructure.Configs;
-using Api.Infrastructure.Container;
-using Api.Infrastructure.Validation;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using CorsPolicySettings;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-namespace Api.Infrastructure
+﻿namespace Api.Infrastructure
 {
+    using System;
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
+    using Configs;
+    using CorsPolicySettings;
+    using Features.Values.Create;
+    using FluentValidation.AspNetCore;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Validation;
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -40,16 +37,10 @@ namespace Api.Infrastructure
             services.AddCorsPolicies(Configuration);
 
             services
-                .AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(ValidationExceptionFilter));
-                })
+                .AddMvc(options => { options.Filters.Add(typeof(ValidationExceptionFilter)); })
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<CreateValuesValidator>(); });
 
-            services.AddApiVersioning(options =>
-            {
-                options.ReportApiVersions = true;
-            });
+            services.AddApiVersioning(options => { options.ReportApiVersions = true; });
 
             ApplicationContainer = services.UseAutofac();
 
@@ -57,7 +48,8 @@ namespace Api.Infrastructure
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

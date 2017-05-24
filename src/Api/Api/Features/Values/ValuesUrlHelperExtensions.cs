@@ -67,13 +67,13 @@
                 Href = urlHelper.Link(ValuesController.PostRouteName, null)
             };
         }
-        //        Type = "GET",
-        //    {
-        //    return new Link
-        //{
-        //public static Link CreateFooValuesLink(this IUrlHelper urlHelper)
 
         // Create link to foo
+        //public static Link CreateFooValuesLink(this IUrlHelper urlHelper)
+        //{
+        //    return new Link
+        //    {
+        //        Type = "GET",
         //        Rel = "foo",
         //        Href = urlHelper.Link(FooController.GetByIdFooRouteName, null)
         //    };

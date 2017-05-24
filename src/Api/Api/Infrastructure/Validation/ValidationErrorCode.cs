@@ -2,7 +2,7 @@
 {
     public enum ValidationErrorCode
     {
-        NotFound,
+        NotFound
         //Add your own codes
     }
 }

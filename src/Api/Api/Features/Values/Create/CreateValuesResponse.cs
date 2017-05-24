@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Api.Features.Values.Create
+﻿namespace Api.Features.Values.Create
 {
+    using System.Collections.Generic;
+
     public class CreateValuesResponse : BaseHateosResponse
     {
         public CreateValuesResponse(int id, string value, IEnumerable<Link> links)

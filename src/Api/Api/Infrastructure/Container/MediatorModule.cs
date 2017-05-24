@@ -1,12 +1,13 @@
-﻿using System.Reflection;
-using System.Collections.Generic;
-using Autofac;
-using MediatR;
-using MediatR.Pipeline;
-
-namespace Api.Infrastructure.Container
+﻿namespace Api.Infrastructure.Container
 {
-    public class MediatorModule : Autofac.Module
+    using System.Collections.Generic;
+    using System.Reflection;
+    using Autofac;
+    using MediatR;
+    using MediatR.Pipeline;
+    using Module = Autofac.Module;
+
+    public class MediatorModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -24,7 +25,7 @@ namespace Api.Infrastructure.Container
             builder.Register<MultiInstanceFactory>(ctx =>
             {
                 var c = ctx.Resolve<IComponentContext>();
-                return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
+                return t => (IEnumerable<object>) c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
             });
 
             builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
