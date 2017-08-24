@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Api.Infrastructure;
+﻿using Api.Infrastructure;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Api
@@ -8,15 +8,13 @@ namespace Api
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel(opt => opt.AddServerHeader = false)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                //.UseApplicationInsights()
-                .Build();
-
-            host.Run();
+            BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder()
+                .UseKestrel(options => options.AddServerHeader = false)
+                .UseStartup<Startup>()
+                .Build();
     }
 }
