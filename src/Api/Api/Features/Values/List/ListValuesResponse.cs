@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class ListValuesResponse : BaseHateosResponse
+    public class ListValuesResponse : BaseHateoasResponse
     {
         public ListValuesResponse(IList<ListValuesResponseItem> values, IEnumerable<Link> links)
             : base(links)
@@ -13,7 +13,7 @@
         public IList<ListValuesResponseItem> Values { get; }
     }
 
-    public class ListValuesResponseItem : BaseHateosResponse
+    public class ListValuesResponseItem : BaseHateoasResponse
     {
         public ListValuesResponseItem(int id, string value, IEnumerable<Link> links)
             : base(links)

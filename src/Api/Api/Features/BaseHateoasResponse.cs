@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class BaseHateosResponse
+    public class BaseHateoasResponse
     {
-        public BaseHateosResponse(IEnumerable<Link> links)
+        public BaseHateoasResponse(IEnumerable<Link> links)
         {
             Links = links;
         }

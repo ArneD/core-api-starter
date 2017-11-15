@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class DetailValuesResponse : BaseHateosResponse
+    public class DetailValuesResponse : BaseHateoasResponse
     {
         public DetailValuesResponse(string value, IEnumerable<Link> links)
             : base(links)
