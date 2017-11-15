@@ -7,6 +7,7 @@
     using List;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -29,7 +30,7 @@
         [HttpGet(Name = GetListRouteName)]
         public IActionResult Get([FromQuery] ListValuesRequest listValuesRequest)
         {
-            var result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).Result;
+            var result = _mediator.Send(listValuesRequest ?? new ListValuesRequest()).GetAwaiter().GetResult();
             return Ok(result);
         }
 
@@ -37,7 +38,7 @@
         [HttpGet("{id:int:min(1)}", Name = GetByIdRouteName)]
         public IActionResult Get([FromRoute] DetailValuesRequest detailValuesRequest)
         {
-            var result = _mediator.Send(detailValuesRequest).Result;
+            var result = _mediator.Send(detailValuesRequest).GetAwaiter().GetResult();
             if (result == null)
                 return NotFound();
 
@@ -48,27 +49,27 @@
         [HttpPost(Name = PostRouteName)]
         public IActionResult Post([FromBody] CreateValuesRequest createValuesRequest)
         {
-            var result = _mediator.Send(createValuesRequest).Result;
+            var result = _mediator.Send(createValuesRequest).GetAwaiter().GetResult();
 
             return CreatedAtRoute(GetByIdRouteName, new DetailValuesRequest {Id = result.Id}, result);
         }
 
         // PUT api/values/5
         [HttpPut("{id:int:min(1)}", Name = PutRouteName)]
-        public IActionResult Put([FromRoute] int id, [FromBody] EditValuesRequest editValuesRequest)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] EditValuesRequest editValuesRequest)
         {
             editValuesRequest.Id = id;
 
-            var result = _mediator.Send(editValuesRequest).Result;
+            var result = await _mediator.Send(editValuesRequest);
 
             return Ok(result);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id:int:min(1)}", Name = DeleteRouteName)]
-        public IActionResult Delete([FromRoute] DeleteValuesRequest deleteValuesRequest)
+        public async Task<IActionResult> Delete([FromRoute] DeleteValuesRequest deleteValuesRequest)
         {
-            _mediator.Send(deleteValuesRequest).Wait();
+            await _mediator.Send(deleteValuesRequest);
 
             return NoContent();
         }
